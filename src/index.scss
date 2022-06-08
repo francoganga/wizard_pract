@@ -1,0 +1,93 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: #d1d4d8;
+  font-family: 'Helvetica Neue', arial, sans-serif;
+  font-weight: 400;
+  color: #444;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.link {
+  color: #fff;
+}
+
+.form {
+    padding: 1em;
+    height: 600px;
+    // border: 1px solid red;
+}
+
+.step-info {
+    ul {
+        display: flex;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        }
+    }
+
+    li {
+        flex: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        a {
+            width: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            &:before {
+                content: " ";
+                border-top: 1px solid #dee2e6;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                display: block;
+                width: 100%;
+                margin-top: -1rem;
+        }
+    }
+}
+
+.step-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    font-size: 1.143rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 1px solid #e9ecef;
+}
+
+.step-label {
+    margin-top: 0.5rem;
+}
+
+.step-active {
+    .step-number {
+        background-color: #EFF6FF;
+        color: #1D4ED8;
+    }
+    .step-label {
+        font-weight: 700;
+    }
+}
+
+.step-inactive {
+    color: #9899ac;
+    .step-number {
+        background: #ffffff;
+    }
+}
