@@ -62,11 +62,11 @@ export function App() {
                     Back
                   </button>
                 )}
-                {step != steps.length -1 &&
+                {step != steps.length - 1 && (
                   <button onClick={goNext} class="btn btn-primary ms-auto">
                     Next
-                    </button>
-                }
+                  </button>
+                )}
               </div>
             </div>
           </div>
