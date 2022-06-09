@@ -1,10 +1,11 @@
-import { useState } from "preact/hooks";
+import { useState, useRef } from "preact/hooks";
 import { Step1, Step2 } from "./components/Step1";
 import { StepInfo } from "./components/step-info";
+import { useForm } from "react-hook-form";
+import { Router, Route } from "preact-router";
+import { useStore } from "./stores/state";
 
 export function App() {
-  const [step, setStep] = useState(0);
-
   const steps = [
     "Datos Personales",
     "Detalle de Contrato",
@@ -12,17 +13,10 @@ export function App() {
     "Observaciones",
   ];
 
-  const goNext = () => {
-    if (step >= 0 && step < steps.length - 1) {
-      setStep(step + 1);
-    }
-  };
-
-  const goBack = () => {
-    if (step > 0 && step < steps.length) {
-      setStep(step - 1);
-    }
-  };
+  const { step, formState } = useStore((state) => ({
+    step: state.step,
+    formState: state.formState,
+  }));
 
   return (
     <>
@@ -37,39 +31,12 @@ export function App() {
 
           <div class="card">
             <div class="card-body">
-              <form class="mb-3">
-                {step == 0 && (
-                  <div class="step-1">
-                    <div class="row">
-                      <div class="col-12 col-md-6">
-                        <label for="name">Nombre</label>
-                        <input id="name" class="form-control" type="text" />
-                      </div>
-                      <div class="col-12 col-md-6">
-                        <label for="apellido">Apellido</label>
-                        <input class="form-control" id="apellido" type="text" />
-                      </div>
-                    </div>
-                  </div>
-                )}
-                {step == 1 && <div class="step-1 h-100">este es el paso 2</div>}
-                {step == 2 && <div class="step-1 h-100">este es el paso 3</div>}
-                {step == 3 && <div class="step-1 h-100">este es el paso 4</div>}
-              </form>
-              <div class="d-flex">
-                {step >= 1 && (
-                  <button onClick={goBack} class="btn btn-primary">
-                    Back
-                  </button>
-                )}
-                {step != steps.length - 1 && (
-                  <button onClick={goNext} class="btn btn-primary ms-auto">
-                    Next
-                  </button>
-                )}
-              </div>
+              <Router>
+                <Route path="/" component={Step1}></Route>
+              </Router>
             </div>
           </div>
+          <h1>name: {formState.name}</h1>
         </div>
       </div>
     </>
