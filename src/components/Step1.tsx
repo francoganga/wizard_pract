@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useStore } from "../stores/state";
 
 export function Step1() {
   type FormData = {
@@ -12,7 +13,12 @@ export function Step1() {
     formState: { errors }
   } = useForm<FormData>();
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const {setFormState, goNext} = useStore(({setFormState, goNext}) => ({setFormState, goNext}) )
+
+  const onSubmit = (data: FormData) => {
+    setFormState(data)
+    goNext()
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

@@ -1,28 +1,37 @@
-import { useState } from "preact/hooks";
+import { useEffect } from "preact/hooks";
 import { Step1 } from "./components/Step1";
+import { Step2 } from "./components/Step2";
 import { StepInfo } from "./components/step-info";
+import { useStore } from "./stores/state";
 
 export function App() {
-  const [step, setStep] = useState(0);
-
   const steps = [
     "Datos Personales",
     "Detalle de Contrato",
     "Materias",
-    "Observaciones"
+    "Observaciones",
   ];
 
-  const goNext = () => {
-    if (step >= 0 && step < steps.length - 1) {
-      setStep(step + 1);
-    }
-  };
+  // const goNext = () => {
+  //   if (step >= 0 && step < steps.length - 1) {
+  //     setStep(step + 1);
+  //   }
+  // };
+  //
+  // const goBack = () => {
+  //   if (step > 0 && step < steps.length) {
+  //     setStep(step - 1);
+  //   }
+  // };
 
-  const goBack = () => {
-    if (step > 0 && step < steps.length) {
-      setStep(step - 1);
-    }
-  };
+  const { setSteps, step, formState } = useStore(
+    ({ setSteps, step, formState }) => ({ setSteps, step, formState })
+  );
+
+  useEffect(() => {
+    console.log("setting stesp");
+    setSteps(steps);
+  }, []);
 
   return (
     <>
@@ -44,7 +53,7 @@ export function App() {
                 >
                   <Step1 />
                 </div>
-                {step == 1 && <div class="step-1 h-100">este es el paso 2</div>}
+                {step == 1 && <Step2 />}
                 {step == 2 && <div class="step-1 h-100">este es el paso 3</div>}
                 {step == 3 && <div class="step-1 h-100">este es el paso 4</div>}
               </form>
