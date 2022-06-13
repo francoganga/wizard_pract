@@ -10,15 +10,15 @@ export function Step1() {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormData>();
 
-  const {setFormState, goNext} = useStore(({setFormState, goNext}) => ({setFormState, goNext}) )
+  const { setFormState, goNext } = useStore((state) => state.wizardState);
 
   const onSubmit = (data: FormData) => {
-    setFormState(data)
-    goNext()
-  }
+    setFormState(data);
+    goNext();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -27,8 +27,9 @@ export function Step1() {
           <label for="name">Nombre</label>
           <input
             {...register("name", { required: true })}
-            class={`form-control ${errors.name?.type === "required" &&
-              "is-invalid"}`}
+            class={`form-control ${
+              errors.name?.type === "required" && "is-invalid"
+            }`}
             type="text"
           />
           <small class="text-danger my-1">
@@ -39,8 +40,9 @@ export function Step1() {
           <label for="apellido">Apellido</label>
           <input
             {...register("apellido", { required: true })}
-            class={`form-control ${errors.apellido?.type === "required" &&
-              "is-invalid"}`}
+            class={`form-control ${
+              errors.apellido?.type === "required" && "is-invalid"
+            }`}
             type="text"
           />
           <small class="text-danger my-1">
@@ -53,8 +55,9 @@ export function Step1() {
           <label for="email">Correo Electrónico</label>
           <input
             {...register("email", { required: true })}
-            class={`form-control ${errors.email?.type === "required" &&
-              "is-invalid"}`}
+            class={`form-control ${
+              errors.email?.type === "required" && "is-invalid"
+            }`}
             type="email"
           />
           <small class="text-danger my-1">

@@ -24,9 +24,7 @@ export function App() {
   //   }
   // };
 
-  const { setSteps, step, formState } = useStore(
-    ({ setSteps, step, formState }) => ({ setSteps, step, formState })
-  );
+  const { setSteps, step, formState } = useStore((state) => state.wizardState);
 
   useEffect(() => {
     console.log("setting stesp");
